@@ -28,7 +28,7 @@ int main()
     
     cout << "Рандомная последовательность" << endl;
     int* arrRand = new int[length]; // рандомная последовательность
-    FillRand(arrRand, n, 0, 50);
+    FillRand(arrRand, n, 0, 600000);
     //int keyRand; cout << "Введите ключ поиска в рандомной последовательности: "; cin >> keyRand;
 
     int* arrGrow = new int[length];
@@ -40,16 +40,21 @@ int main()
     int (*SearchOperations[4])(int*, int, int) = { QSearch, SSearch, TSearch, BSearch }; // Указатель на массив функций
     
     int lengthLin = sizeof(SearchOperations) / sizeof(SearchOperations[0]);// получаем длину массива
+    //int keyRand; cout << "Введите ключ поиска в рандомной последовательности: "; cin >> keyRand;
 
+    //int keyGrow; cout << "Введите ключ поиска в возрастающей последовательности: "; cin >> keyGrow;
     for (int i = 0; i < lengthLin - 2; i++) // цикл по рандомной последовательности
     {
         for (int j = 0; j < 3; j++) {
             int key = 0;
+            //key = keyRand;
             if (j == 0) key = arrRand[0]; // ключ поиска
             else if (j == 1) key = arrRand[length / 2]; // ключ поиска
             else if (j == 2) key = arrRand[length - 1]; // ключ поиска*/
             auto begin = chrono::steady_clock::now(); // получаем время перед началом формирования последовательности
-            cout << "Процедура " << i << " ключ поиска : " << key << endl;
+            //cout << "Процедура " << i << " ключ поиска : " << key << endl;
+            
+
             int result = SearchOperations[i](&arrRand[0], key, length);    // вызов функции по указателю
 
 
@@ -57,12 +62,12 @@ int main()
 
             auto elapsed_ms = chrono::duration_cast<chrono::microseconds>(end - begin);// получаем время работы в микросекундах
             if (result >= 0) {
-                cout << "Процедура " << i << " индекс равен : " << result << endl;
+                //cout << "Процедура " << i << " индекс равен : " << result << endl;
             }
             else {
-                cout << "Процедура " << i << " элемент не найден" << endl;
+                //cout << "Процедура " << i << " элемент не найден" << endl;
             }
-            //cout << elapsed_ms.count() << endl; // вывод времени
+            cout << elapsed_ms.count() << endl; // вывод времени
         }
     }
 
@@ -74,7 +79,8 @@ int main()
             else if (j == 1) key = arrGrow[length / 2]; // ключ поиска
             else if (j == 2) key = arrGrow[length - 1]; // ключ поиска*/
             auto begin = chrono::steady_clock::now(); // получаем время перед началом формирования последовательности
-            cout << "Процедура " << i << " ключ поиска : " << key << endl;
+            //cout << "Процедура " << i << " ключ поиска : " << key << endl;
+            //key = keyGrow;
             int result = SearchOperations[i](&arrGrow[0], key, length);    // вызов функции по указателю
                 
           
@@ -82,12 +88,12 @@ int main()
 
             auto elapsed_ms = chrono::duration_cast<chrono::microseconds>(end - begin);// получаем время работы в микросекундах
             if (result >= 0) {
-                cout << "Процедура " << i << " индекс равен : " << result << endl;
+                //cout << "Процедура " << i << " индекс равен : " << result << endl;
             }
             else {
-                cout << "Процедура " << i << " элемент не найден" << endl;
+                //cout << "Процедура " << i << " элемент не найден" << endl;
             }
-            //cout << elapsed_ms.count() << endl; // вывод времени
+            cout << elapsed_ms.count() << endl; // вывод времени
         }
     }
 
@@ -165,7 +171,7 @@ int BSearch(int* arr, int key, int size) {
             p = q + 1;
         }
     }
-
+    cout << "Кол-во сравнений BSearch = " << count << endl;
     return NotFound;
 }
 
@@ -178,14 +184,14 @@ void FillGrow(int* arr, int length, int min, int max) {
     }
     //arr[min + rand() % (max - min + 1)] = arr[min + rand() % (max - min + 1)]; // повторяющийся элемент
     arr[length - 1] = INT_MAX;
-    Writer(arr, length);
+    //Writer(arr, length);
 }
 void FillRand(int* arr, int length, double min, double max) {
     for (int i = 0; i < length - 1; i++) {
         arr[i] = 10 + ((double)rand() / RAND_MAX) * (max - min);
     }
     arr[length - 1] = INT_MAX;
-    Writer(arr, length);
+    //Writer(arr, length);
 }
 void Writer(int* A, int length) {
     for (int i = 0; i < length; i++) {
