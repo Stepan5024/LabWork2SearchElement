@@ -53,12 +53,12 @@ int main()
 
             auto elapsed_ms = chrono::duration_cast<chrono::microseconds>(end - begin);// получаем время работы в микросекундах
             if (result >= 0) {
-                cout << "Процедура " << i << " индекс равен : " << result << endl;
+                //cout << "Процедура " << i << " индекс равен : " << result << endl;
             }
             else {
-                cout << "Процедура " << i << " элемент не найден" << endl;
+                //cout << "Процедура " << i << " элемент не найден" << endl;
             }
-            //cout << elapsed_ms.count() << endl; // вывод времени
+            cout << elapsed_ms.count() << endl; // вывод времени
         }
     }
     Sort(arrRand, length);
@@ -79,12 +79,12 @@ int main()
 
             auto elapsed_ms = chrono::duration_cast<chrono::microseconds>(end - begin);// получаем время работы в микросекундах
             if (result >= 0) {
-                cout << "Процедура " << i << " индекс равен : " << result << endl;
+                //cout << "Процедура " << i << " индекс равен : " << result << endl;
             }
             else {
-                cout << "Процедура " << i << " элемент не найден" << endl;
+                //cout << "Процедура " << i << " элемент не найден" << endl;
             }
-            //cout << elapsed_ms.count() << endl; // вывод времени
+            cout << elapsed_ms.count() << endl; // вывод времени
         }
     }
 
