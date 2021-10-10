@@ -27,11 +27,21 @@ int main()
     cout << "Введите размер последовательности: "; cin >> n;
     int length = n += 1;
     
-    cout << "Рандомная последовательность" << endl;
-
+    int f = 0;
+    do {
+        cout << "Введите 1, чтобы рандомно заполнить массив\nВведите 2, чтобы заполнить массив вручную: "; cin >> f;
+        if (f == 1 || f == 2) break;
+    } while (1);
     int* arrRand = new int[length]; // рандомная последовательность
-    FillRand(arrRand, n, 0, 600000);
-    
+    if (f == 1) {
+        cout << "Рандомная последовательность" << endl;
+        FillRand(arrRand, n, 0, 30);
+    }
+    else {
+        for (int i = 0; i < n; i++) {
+            cout << "Введите элемент последовательности: "; cin >> arrRand[i];
+        }
+    }
     int (*SearchOperations[4])(int*, int, int) = { QSearch, SSearch, TSearch, BSearch }; // Указатель на массив функций
     
     int lengthLin = sizeof(SearchOperations) / sizeof(SearchOperations[0]);// получаем длину массива
@@ -46,7 +56,7 @@ int main()
             else if (j == 1) key = arrRand[length / 2]; // ключ поиска
             else if (j == 2) key = arrRand[length - 1]; // ключ поиска*/
             auto begin = chrono::steady_clock::now(); // получаем время перед началом формирования последовательности
-            
+            key = 58;
             int result = SearchOperations[i](&arrRand[0], key, length);    // вызов функции по указателю
 
             auto end = chrono::steady_clock::now();// получаем время по окончанию формирования последовательности
@@ -58,7 +68,7 @@ int main()
             else {
                 //cout << "Процедура " << i << " элемент не найден" << endl;
             }
-            cout << elapsed_ms.count() << endl; // вывод времени
+            cout << elapsed_ms.count() << " (мкС)" << endl; // вывод времени
         }
     }
     Sort(arrRand, length);
@@ -71,7 +81,7 @@ int main()
             else if (j == 2) key = arrRand[length - 1]; // ключ поиска*/
             auto begin = chrono::steady_clock::now(); // получаем время перед началом формирования последовательности
             //cout << "Процедура " << i << " ключ поиска : " << key << endl;
-            //key = keyGrow;
+            key = 58;
             int result = SearchOperations[i](&arrRand[0], key, length);    // вызов функции по указателю
                 
           
@@ -84,7 +94,7 @@ int main()
             else {
                 //cout << "Процедура " << i << " элемент не найден" << endl;
             }
-            cout << elapsed_ms.count() << endl; // вывод времени
+            cout << elapsed_ms.count() << " (мкС)" << endl; // вывод времени
         }
     }
 
@@ -97,11 +107,11 @@ int SSearch(int* arr, int key, int size) { // реализован по блок
     for (int i = 0; i < size; i++) {
         count += 2; // две операции сравнения, первая не вышли ли за размер массива, вторая на равенство ключу
         if (arr[i] == key) {
-            cout << "Количество операций сравнения для SSearch " << count << endl;
+            cout << "Количество сравнения для SSearch " << count << endl;
             return i;
         }
     }
-    cout << "Количество операций сравнения для SSearch " << count << endl;
+    cout << "Количество сравнения для SSearch " << count << endl;
     return NotFound;
 
 }
